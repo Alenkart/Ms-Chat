@@ -6,7 +6,6 @@ public class Messenger {
     public static void main (String[] args){
         VServidor server = new VServidor();
         server.show();
-        
     }
     
     public static void initServer()

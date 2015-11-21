@@ -19,7 +19,7 @@ public class Conector extends Thread{
             this.entrada = new BufferedReader(entradaSocket);
             
             this.salida= new DataOutputStream(s.getOutputStream());
-            this.salida.writeUTF("'"+VCliente.txtNombre.getText()+"' se ha "+"Conectado... \n");
+            this.salida.writeUTF(""+VCliente.getTxtNombre()+": Conectado... \n");
             
         }catch (Exception e){};
     }
@@ -30,7 +30,9 @@ public class Conector extends Thread{
         while(true)
         {try{
             texto = entrada.readLine();
-            VCliente.jTextArea1.setText(VCliente.jTextArea1.getText()+"\n"+ texto);
+            if(texto != null )
+                VCliente.jTextArea1.setText(VCliente.jTextArea1.getText()+"\n"+ texto);
+            
         }catch(IOException e){};
         }
     }
@@ -40,8 +42,8 @@ public class Conector extends Thread{
         System.out.println("enviado");
         try{
             this.salida = new DataOutputStream(s.getOutputStream());
-            this.salida.writeUTF(VCliente.txtNombre.getText()+": "+msg+"\n");
-            VCliente.jTextArea1.setText(VCliente.jTextArea1.getText()+"\n"+VCliente.txtNombre.getText()+": "+ msg);
+            this.salida.writeUTF(VCliente.getTxtNombre()+": "+msg+"\n");
+            VCliente.jTextArea1.setText(VCliente.jTextArea1.getText()+"\n"+VCliente.getTxtNombre()+": "+ msg);
         }catch (IOException e){
             System.out.println("Problema al enviar");
         };
